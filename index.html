@@ -146,24 +146,41 @@
             position: relative;
             padding: 7rem 0 7rem;
             background-image:
-                linear-gradient(rgba(10, 10, 10, 0.38), rgba(10, 10, 10, 0.46)),
+                linear-gradient(rgba(10, 10, 10, 0.24), rgba(10, 10, 10, 0.32)),
                 url('assets/hero-background.png');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg,
+                    rgba(17, 17, 17, 0.88) 0%,
+                    rgba(17, 17, 17, 0.82) 22%,
+                    rgba(17, 17, 17, 0.68) 40%,
+                    rgba(17, 17, 17, 0.42) 60%,
+                    rgba(17, 17, 17, 0.20) 78%,
+                    rgba(17, 17, 17, 0.10) 100%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         .hero::after {
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(
-                90deg,
-                rgba(17, 17, 17, 0.42) 0%,
-                rgba(17, 17, 17, 0.24) 42%,
-                rgba(17, 17, 17, 0.12) 100%
-            );
+            background:
+                linear-gradient(180deg,
+                    rgba(17, 17, 17, 0.20) 0%,
+                    rgba(17, 17, 17, 0.08) 30%,
+                    rgba(17, 17, 17, 0.18) 100%);
             pointer-events: none;
+            z-index: 1;
         }
 
         .hero .wrap {
@@ -420,6 +437,14 @@
             .hero {
                 padding: 5rem 0 5rem;
                 background-position: center center;
+            }
+
+            .hero::before {
+                background:
+                    linear-gradient(180deg,
+                        rgba(17, 17, 17, 0.78) 0%,
+                        rgba(17, 17, 17, 0.58) 45%,
+                        rgba(17, 17, 17, 0.36) 100%);
             }
 
             .offer__grid {
