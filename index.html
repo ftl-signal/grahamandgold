@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Graham &amp; Gold | Narrative Systems</title>
+  <title>Graham &amp; Gold — An Editor's Studio</title>
 
-  <meta name="description" content="I turn stale small-business websites into sharper, story-driven brands.">
-  <meta property="og:title" content="Graham &amp; Gold | Narrative Systems">
-  <meta property="og:description" content="I turn stale small-business websites into sharper, story-driven brands.">
+  <meta name="description" content="A one-desk newsroom for small businesses. A working news director rewrites, reshapes, and rebuilds your website the way he'd edit a front-page story.">
+  <meta property="og:title" content="Graham &amp; Gold — An Editor's Studio">
+  <meta property="og:description" content="A one-desk newsroom for small businesses. A working news director rewrites, reshapes, and rebuilds your website the way he'd edit a front-page story.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ftl-signal.github.io/grahamandgold/">
   <meta property="og:image" content="https://ftl-signal.github.io/grahamandgold/assets/og-image.png">
@@ -15,850 +15,1316 @@
   <meta property="og:image:height" content="630">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Graham &amp; Gold | Narrative Systems">
-  <meta name="twitter:description" content="I turn stale small-business websites into sharper, story-driven brands.">
+  <meta name="twitter:title" content="Graham &amp; Gold — An Editor's Studio">
+  <meta name="twitter:description" content="A one-desk newsroom for small businesses. A working news director rewrites, reshapes, and rebuilds your website the way he'd edit a front-page story.">
   <meta name="twitter:image" content="https://ftl-signal.github.io/grahamandgold/assets/og-image.png">
 
   <link rel="icon" type="image/png" sizes="64x64" href="assets/graham_gold_favicon_64.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/graham_gold_favicon_32.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400;1,9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
+    /* ══════════════════════════════════════════════════════════
+       TOKENS
+       ══════════════════════════════════════════════════════════ */
     :root {
-      --bg: #0c0c0c;
-      --panel: #131313;
-      --text: #f4f1ea;
-      --text-sub: #c4bdb0;
-      --text-dim: #877f74;
-      --gold: #c9a66b;
-      --gold-shape: rgba(201, 166, 107, 0.80);
-      --rule: rgba(244, 241, 234, 0.055);
-      --rule-strong: rgba(201, 166, 107, 0.10);
-      --shadow-card: 0 28px 72px rgba(0, 0, 0, 0.52);
+      --paper:        #F4F0E6;
+      --paper-warm:   #EAE3D0;
+      --paper-deep:   #E2D9C0;
+      --ink:          #0E0E0C;
+      --ink-soft:     #3A3732;
+      --ink-dim:      #6B665C;
+      --rule:         #D9D2BF;
+      --rule-strong:  #BFB59C;
+      --accent-red:   #B8331F;
+      --accent-red-d: #8E2715;
+      --accent-gold:  #A68544;
+
+      --f-display: 'Fraunces', 'Times New Roman', Georgia, serif;
+      --f-read:    'Newsreader', Georgia, 'Times New Roman', serif;
+      --f-mono:    'IBM Plex Mono', 'Courier New', Courier, monospace;
+
       --page: 1180px;
-      --font: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+      --narrow: 780px;
+
+      --s-section: clamp(4.5rem, 9vw, 8rem);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ══════════════════════════════════════════════════════════
+       RESET
+       ══════════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
     body {
-      font-family: var(--font);
-      font-size: 16px;
-      line-height: 1.72;
-      color: var(--text);
-      background: var(--bg);
+      font-family: var(--f-read);
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--ink);
+      background: var(--paper);
+      font-feature-settings: "kern" 1, "liga" 1;
     }
 
-    img { display: block; max-width: 100%; height: auto; }
+    img, svg { display: block; max-width: 100%; height: auto; }
     a { color: inherit; text-decoration: none; }
-    ul { list-style: none; }
+    ul, ol { list-style: none; }
+
+    ::selection { background: var(--ink); color: var(--paper); }
+
+    /* Subtle paper texture via layered noise */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background-image: radial-gradient(rgba(14,14,12,0.035) 1px, transparent 1px);
+      background-size: 3px 3px;
+      opacity: 0.6;
+    }
 
     .wrap {
       max-width: var(--page);
       margin: 0 auto;
-      padding-left: 2.75rem;
-      padding-right: 2.75rem;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+      position: relative;
+      z-index: 2;
     }
 
+    /* ══════════════════════════════════════════════════════════
+       UTILITIES — editorial primitives
+       ══════════════════════════════════════════════════════════ */
     .label {
-      font-size: 0.67rem;
-      font-weight: 700;
-      letter-spacing: 0.21em;
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--ink-soft);
     }
+
+    .label--red   { color: var(--accent-red); }
+    .label--dim   { color: var(--ink-dim); }
+
+    .rule-hair   { height: 1px; background: var(--rule);         border: 0; width: 100%; }
+    .rule-strong { height: 1px; background: var(--rule-strong);  border: 0; width: 100%; }
+    .rule-ink    { height: 2px; background: var(--ink);          border: 0; width: 100%; }
+
+    .section-marker {
+      display: flex;
+      align-items: baseline;
+      gap: 0.9rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 2.25rem;
+    }
+    .section-marker__num  { font-family: var(--f-mono); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-red); }
+    .section-marker__name { font-family: var(--f-mono); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      font-family: var(--font);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.17em;
-      text-transform: uppercase;
-      padding: 0.88em 2em;
-      border: none;
-      cursor: pointer;
-      transition: background 0.28s ease, color 0.28s ease;
-      white-space: nowrap;
-    }
-
-    .btn--gold {
-      background: var(--gold);
-      color: var(--bg);
-    }
-
-    .btn--gold:hover {
-      background: var(--text);
-      color: var(--bg);
-    }
-
-    /* ═══════════════════════════════════
-       Header
-       ═══════════════════════════════════ */
-
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(12, 12, 12, 0.92);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    .header .wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 68px;
-    }
-
-    .header__logo { height: 42px; width: auto; }
-
-    .header__nav {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .header__link {
-      font-size: 0.68rem;
+      gap: 0.6em;
+      font-family: var(--f-mono);
+      font-size: 0.74rem;
       font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--text-dim);
-      transition: color 0.22s ease;
+      padding: 0.95em 1.7em;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
     }
+    .btn__arrow { transition: transform 0.2s ease; }
+    .btn:hover .btn__arrow { transform: translateX(3px); }
 
-    .header__link:hover { color: var(--text); }
-
-    .header .btn {
-      padding: 0.74em 1.7em;
-      font-size: 0.66rem;
+    .btn--ink {
+      background: var(--ink);
+      color: var(--paper);
     }
+    .btn--ink:hover { background: var(--accent-red); }
 
-    /* ═══════════════════════════════════
-       Hero
-       ═══════════════════════════════════ */
+    .btn--ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+    .btn--ghost:hover { background: var(--ink); color: var(--paper); }
 
-    .hero {
+    /* ══════════════════════════════════════════════════════════
+       HEADER — masthead
+       ══════════════════════════════════════════════════════════ */
+    .topbar {
+      background: var(--ink);
+      color: var(--paper);
       position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid var(--rule-strong);
+      z-index: 11;
     }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 46% 55% at 10% 32%, rgba(201, 166, 107, 0.065), transparent),
-        radial-gradient(ellipse 35% 45% at 78% 22%, rgba(201, 166, 107, 0.025), transparent);
-      pointer-events: none;
-    }
-
-    .hero .wrap {
-      position: relative;
-      z-index: 2;
-      padding-top: 5.5rem;
-      padding-bottom: 5rem;
-    }
-
-    .hero__grid {
-      display: grid;
-      grid-template-columns: minmax(0, 490px) 1fr;
+    .topbar .wrap {
+      display: flex;
       align-items: center;
-      gap: 3rem;
+      justify-content: space-between;
+      padding-top: 0.55rem;
+      padding-bottom: 0.55rem;
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .topbar__dateline span + span { margin-left: 0.9rem; padding-left: 0.9rem; border-left: 1px solid rgba(244,240,230,0.2); }
+    .topbar__status { color: var(--accent-gold); }
+    .topbar__status::before {
+      content: "";
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--accent-gold);
+      border-radius: 50%;
+      margin-right: 0.55em;
+      transform: translateY(-1px);
     }
 
-    .hero__copy { position: relative; }
-
-    .hero__gold-shape {
-      position: absolute;
-      top: 52px;
-      left: -20px;
-      width: 470px;
-      height: 380px;
-      background: var(--gold-shape);
-      clip-path: polygon(0 0, 100% 0, 86% 50%, 100% 100%, 0 100%);
-      z-index: 0;
+    .masthead {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(244, 240, 230, 0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--ink);
     }
-
-    .hero__copy .label,
-    .hero__rule,
-    .hero__h1,
-    .hero__sub,
-    .hero__copy .btn {
-      position: relative;
-      z-index: 2;
+    .masthead .wrap {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding-top: 1.1rem;
+      padding-bottom: 1.1rem;
+      gap: 1.5rem;
     }
-
-    .hero__rule {
-      width: 44px;
-      height: 1px;
-      background: var(--gold);
-      border: 0;
-      margin: 0.8rem 0 1.4rem;
+    .masthead__left {
+      font-family: var(--f-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
     }
-
-    .hero__h1 {
-      font-size: clamp(2.5rem, 3.9vw, 3.6rem);
+    .masthead__center { text-align: center; }
+    .masthead__wordmark {
+      font-family: var(--f-display);
       font-weight: 800;
-      line-height: 0.965;
-      letter-spacing: -0.052em;
-      margin-bottom: 1.6rem;
+      font-size: clamp(1.5rem, 2.6vw, 2rem);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--ink);
+      font-variation-settings: "opsz" 144;
     }
-
-    .hero__sub {
-      max-width: 390px;
-      font-size: 0.97rem;
-      line-height: 1.82;
-      color: rgba(244, 241, 234, 0.68);
-      margin-bottom: 2.1rem;
-      font-weight: 400;
+    .masthead__wordmark .amp {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--accent-red);
+      padding: 0 0.08em;
+      font-variation-settings: "opsz" 144;
     }
-
-    .hero__visual {
+    .masthead__sub {
+      font-family: var(--f-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-top: 0.3rem;
+    }
+    .masthead__nav {
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      gap: 1.5rem;
     }
-
-    .hero__visual-card {
-      position: relative;
-      width: 100%;
-      max-width: 540px;
-      border: 1px solid rgba(255, 255, 255, 0.055);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-    }
-
-    .hero__visual-card::before {
-      content: "Transformation Proof";
-      position: absolute;
-      top: 0.7rem;
-      left: 0.7rem;
-      z-index: 2;
-      padding: 0.3rem 0.55rem;
-      font-size: 0.56rem;
-      font-weight: 800;
-      letter-spacing: 0.15em;
+    .masthead__link {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--bg);
-      background: var(--gold);
+      color: var(--ink-soft);
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+    .masthead__link:hover { color: var(--ink); border-bottom-color: var(--accent-red); }
+    .masthead__cta {
+      padding: 0.75em 1.3em;
+      font-size: 0.68rem;
     }
 
-    .hero__visual-card img { width: 100%; display: block; }
-
-    .hero__proof-mobile { display: none; }
-
-    /* ═══════════════════════════════════
-       Edge
-       ═══════════════════════════════════ */
-
-    .edge {
-      padding: 2.8rem 0;
-      border-bottom: 1px solid var(--rule-strong);
+    /* ══════════════════════════════════════════════════════════
+       HERO — type-only lead
+       ══════════════════════════════════════════════════════════ */
+    .hero {
+      padding-top: clamp(3rem, 6vw, 5rem);
+      padding-bottom: clamp(3rem, 6vw, 5rem);
+      border-bottom: 1px solid var(--ink);
+      position: relative;
     }
-
-    .edge__text {
-      max-width: 700px;
-      font-size: 0.98rem;
-      line-height: 1.92;
-      color: var(--text-sub);
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      align-items: start;
     }
-
-    .edge__text strong {
-      color: var(--text);
+    .hero__slug {
+      padding-top: 0.4rem;
+      border-top: 2px solid var(--ink);
+      padding-right: 2rem;
+    }
+    .hero__slug-label {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
       font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-red);
+      margin-bottom: 0.6rem;
     }
-
-    /* ═══════════════════════════════════
-       Offer
-       ═══════════════════════════════════ */
-
-    .offer {
-      padding: 4rem 0;
-      border-bottom: 1px solid var(--rule-strong);
+    .hero__slug-byline {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      line-height: 1.7;
     }
+    .hero__slug-byline strong { color: var(--ink); font-weight: 600; }
 
-    .offer__top { margin-bottom: 2.5rem; }
+    .hero__body { border-top: 2px solid var(--ink); padding-top: 0.4rem; }
 
-    .offer__title {
-      font-size: clamp(1.55rem, 2.4vw, 2.05rem);
+    .hero__h1 {
+      font-family: var(--f-display);
       font-weight: 800;
-      letter-spacing: -0.028em;
-      margin-bottom: 0.2em;
+      font-size: clamp(2.6rem, 6.4vw, 5.25rem);
+      line-height: 0.97;
+      letter-spacing: -0.035em;
+      color: var(--ink);
+      margin-top: 1.1rem;
+      margin-bottom: 1.8rem;
+      font-variation-settings: "opsz" 144, "SOFT" 30;
+    }
+    .hero__h1 em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--accent-red);
+      font-variation-settings: "opsz" 144;
     }
 
-    .offer__price {
-      font-size: 0.88rem;
+    .hero__deck {
+      font-family: var(--f-read);
+      font-size: clamp(1.05rem, 1.35vw, 1.22rem);
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 640px;
+      margin-bottom: 2.2rem;
+      font-variation-settings: "opsz" 16;
+    }
+    .hero__deck::first-letter {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 3.8rem;
+      line-height: 0.85;
+      float: left;
+      padding: 0.25rem 0.55rem 0 0;
+      color: var(--ink);
+    }
+
+    .hero__ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       FEATURED SHOT — Florida Signal as front-page photo
+       ══════════════════════════════════════════════════════════ */
+    .featured-shot {
+      padding-top: clamp(3rem, 5vw, 4.5rem);
+      padding-bottom: clamp(3rem, 5vw, 4.5rem);
+      border-bottom: 1px solid var(--rule-strong);
+    }
+    .featured-shot__caption-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .featured-shot__kicker {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
       font-weight: 600;
-      color: var(--gold);
-      margin-bottom: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-red);
+    }
+    .featured-shot__byline {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+    }
+    .featured-shot__frame {
+      background: var(--paper-warm);
+      padding: clamp(0.9rem, 1.5vw, 1.25rem);
+      border: 1px solid var(--rule-strong);
+    }
+    .featured-shot__frame img {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--rule);
+    }
+    .featured-shot__cap {
+      margin-top: 0.9rem;
+      font-family: var(--f-read);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      max-width: 780px;
+    }
+    .featured-shot__cap strong {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--ink);
+      font-family: var(--f-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 0.4em;
     }
 
-    .offer__desc {
-      max-width: 660px;
-      font-size: 0.97rem;
-      line-height: 1.88;
-      color: var(--text-sub);
+    /* ══════════════════════════════════════════════════════════
+       SECTION: THE EDGE
+       ══════════════════════════════════════════════════════════ */
+    .edge {
+      padding-top: var(--s-section);
+      padding-bottom: var(--s-section);
+      border-bottom: 1px solid var(--rule-strong);
     }
+    .edge__head {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      align-items: end;
+      margin-bottom: 3.5rem;
+    }
+    .edge__lede {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3.2vw, 2.9rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      max-width: 720px;
+      font-variation-settings: "opsz" 144;
+    }
+    .edge__lede em { font-style: italic; font-weight: 500; color: var(--accent-red); font-variation-settings: "opsz" 144; }
+
+    .edge__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.25rem;
+    }
+    .edge__col {
+      border-top: 2px solid var(--ink);
+      padding-top: 1rem;
+    }
+    .edge__col-num {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--ink-dim);
+      margin-bottom: 1rem;
+    }
+    .edge__col-h {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 1.4rem;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 0.7rem;
+      font-variation-settings: "opsz" 36;
+    }
+    .edge__col-body {
+      font-family: var(--f-read);
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       CASE FILES
+       ══════════════════════════════════════════════════════════ */
+    .cases {
+      padding-top: var(--s-section);
+      padding-bottom: var(--s-section);
+      border-bottom: 1px solid var(--rule-strong);
+    }
+    .cases__header {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      align-items: end;
+      margin-bottom: 3rem;
+    }
+    .cases__title {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3.2vw, 2.9rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      max-width: 720px;
+      font-variation-settings: "opsz" 144;
+    }
+    .cases__title em { font-style: italic; font-weight: 500; color: var(--accent-red); font-variation-settings: "opsz" 144; }
+
+    .case {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      border-top: 1px solid var(--rule-strong);
+    }
+    .case:last-of-type { border-bottom: 1px solid var(--rule-strong); }
+
+    .case__meta { padding-right: 1rem; }
+    .case__meta-file {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-red);
+      margin-bottom: 0.6rem;
+    }
+    .case__meta-date {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-bottom: 1.5rem;
+    }
+    .case__meta-list {
+      border-top: 1px solid var(--rule);
+    }
+    .case__meta-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .case__meta-list li span:last-child { color: var(--ink); font-weight: 500; text-align: right; }
+
+    .case__content h3 {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: clamp(1.45rem, 2.2vw, 2rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+      font-variation-settings: "opsz" 72;
+    }
+    .case__content p {
+      font-family: var(--f-read);
+      font-size: 1.02rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin-bottom: 1.25rem;
+      max-width: 640px;
+    }
+    .case__frame {
+      margin-top: 0.5rem;
+      background: var(--paper-warm);
+      padding: clamp(0.9rem, 1.4vw, 1.2rem);
+      border: 1px solid var(--rule-strong);
+    }
+    .case__frame img {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--rule);
+    }
+    .case__cap {
+      margin-top: 0.85rem;
+      font-family: var(--f-read);
+      font-style: italic;
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      max-width: 700px;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       OFFER
+       ══════════════════════════════════════════════════════════ */
+    .offer {
+      padding-top: var(--s-section);
+      padding-bottom: var(--s-section);
+      border-bottom: 1px solid var(--rule-strong);
+      background: var(--paper-warm);
+    }
+    .offer__head {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      align-items: end;
+      margin-bottom: 3rem;
+    }
+    .offer__title {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3.2vw, 2.9rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      max-width: 720px;
+      font-variation-settings: "opsz" 144;
+    }
+    .offer__title em { font-style: italic; font-weight: 500; color: var(--accent-red); font-variation-settings: "opsz" 144; }
 
     .offer__grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3.5rem;
+      gap: 0;
+      border: 1px solid var(--ink);
+      background: var(--paper);
     }
 
-    .offer__col-label { margin-bottom: 0.8rem; }
-
-    .inc-list li {
-      position: relative;
-      font-size: 0.94rem;
-      color: var(--text-sub);
-      padding: 0.68rem 0 0.68rem 1rem;
-      border-bottom: 1px solid var(--rule);
+    .tier {
+      padding: 2.2rem;
+      border-right: 1px solid var(--ink);
+      display: flex;
+      flex-direction: column;
     }
+    .tier:last-child { border-right: none; }
 
-    .inc-list li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 50%;
-      width: 5px;
-      height: 1px;
-      background: var(--gold);
-      transform: translateY(-50%);
+    .tier__kicker {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-red);
+      margin-bottom: 0.5rem;
     }
+    .tier__name {
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+      font-variation-settings: "opsz" 72;
+    }
+    .tier__price {
+      font-family: var(--f-mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .tier__price strong { color: var(--accent-red); font-weight: 600; }
 
-    .tier-block {
-      padding-bottom: 1.4rem;
-      border-bottom: 1px solid var(--rule);
+    .tier__desc {
+      font-family: var(--f-read);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
       margin-bottom: 1.4rem;
     }
-
-    .tier-block__name {
-      font-size: 1.02rem;
-      font-weight: 700;
-      margin-bottom: 0.08rem;
+    .tier__list {
+      border-top: 1px solid var(--rule);
+      margin-bottom: 1.6rem;
     }
-
-    .tier-block__price {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--gold);
-      margin-bottom: 0.3rem;
-    }
-
-    .tier-block__desc {
-      font-size: 0.9rem;
-      line-height: 1.82;
-      color: var(--text-dim);
-    }
-
-    .addon-list li {
+    .tier__list li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-family: var(--f-read);
+      font-size: 0.98rem;
+      color: var(--ink);
       display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      font-size: 0.9rem;
-      color: var(--text-dim);
-      padding: 0.64rem 0;
-      border-bottom: 1px solid rgba(244, 241, 234, 0.04);
+      gap: 0.7rem;
     }
-
-    .addon-price {
-      white-space: nowrap;
-      color: var(--text-sub);
+    .tier__list li::before {
+      content: "§";
+      font-family: var(--f-display);
       font-weight: 600;
-      font-size: 0.84rem;
+      color: var(--accent-red);
+      flex-shrink: 0;
+    }
+    .tier__cta {
+      margin-top: auto;
+      padding-top: 0.5rem;
+    }
+    .tier__timeline {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-bottom: 1rem;
     }
 
-    /* ═══════════════════════════════════
-       Proof
-       ═══════════════════════════════════ */
+    .offer__footnote {
+      margin-top: 2rem;
+      padding: 1.1rem 0 0;
+      border-top: 1px solid var(--rule);
+      font-family: var(--f-read);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    .offer__footnote strong {
+      font-style: normal;
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-right: 0.4em;
+    }
 
-    .proof {
-      padding: 4rem 0;
+    /* ══════════════════════════════════════════════════════════
+       THE BEAT — process
+       ══════════════════════════════════════════════════════════ */
+    .beat {
+      padding-top: var(--s-section);
+      padding-bottom: var(--s-section);
       border-bottom: 1px solid var(--rule-strong);
     }
-
-    .proof__eyebrow { margin-bottom: 2.25rem; }
-
-    .proof__grid { display: grid; gap: 3rem; }
-
-    .case { display: grid; gap: 0.85rem; }
-
-    .case__tag {
-      font-size: 0.64rem;
+    .beat__head {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      align-items: end;
+      margin-bottom: 3rem;
+    }
+    .beat__title {
+      font-family: var(--f-display);
       font-weight: 700;
+      font-size: clamp(1.8rem, 3.2vw, 2.9rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      max-width: 720px;
+      font-variation-settings: "opsz" 144;
+    }
+    .beat__title em { font-style: italic; font-weight: 500; color: var(--accent-red); font-variation-settings: "opsz" 144; }
+
+    .beat__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 2px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+    .beat__step {
+      padding: 1.5rem 1.5rem 1.75rem 0;
+      border-right: 1px solid var(--rule);
+    }
+    .beat__step:last-child { border-right: none; }
+    .beat__step-num {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
       letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-dim);
+      color: var(--accent-red);
+      margin-bottom: 1rem;
     }
-
-    .case__name {
-      font-size: clamp(1.15rem, 1.7vw, 1.42rem);
-      font-weight: 800;
-      letter-spacing: -0.015em;
-      line-height: 1.2;
+    .beat__step-name {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 0.7rem;
+      font-variation-settings: "opsz" 72;
     }
-
-    .case__img {
-      margin-top: 0.25rem;
-      border: 1px solid var(--rule);
-      overflow: hidden;
-      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24);
-    }
-
-    .case__img img { width: 100%; }
-
-    .case__desc {
-      max-width: 640px;
+    .beat__step-body {
+      font-family: var(--f-read);
       font-size: 0.95rem;
-      line-height: 1.88;
-      color: var(--text-sub);
+      line-height: 1.58;
+      color: var(--ink-soft);
     }
 
-    /* ═══════════════════════════════════
-       CTA Final
-       ═══════════════════════════════════ */
-
-    .cta-final {
-      padding: 4rem 0 5rem;
-      border-top: 1px solid var(--rule-strong);
+    /* ══════════════════════════════════════════════════════════
+       CTA FINAL — file a brief
+       ══════════════════════════════════════════════════════════ */
+    .cta {
+      padding-top: clamp(5rem, 10vw, 9rem);
+      padding-bottom: clamp(5rem, 10vw, 9rem);
+      background: var(--ink);
+      color: var(--paper);
+      position: relative;
+      overflow: hidden;
     }
-
-    .cta-final__h2 {
-      font-size: clamp(1.55rem, 2.8vw, 2.25rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.028em;
-      max-width: 520px;
-      margin-bottom: 0.8rem;
+    .cta__slug {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(244, 240, 230, 0.18);
     }
-
-    .cta-final__body {
-      max-width: 480px;
-      font-size: 0.97rem;
-      line-height: 1.88;
-      color: var(--text-sub);
-      margin-bottom: 1.85rem;
+    .cta__h2 {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: clamp(2.2rem, 5vw, 4.4rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
+      color: var(--paper);
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+      font-variation-settings: "opsz" 144;
     }
+    .cta__h2 em { font-style: italic; font-weight: 500; color: var(--accent-gold); font-variation-settings: "opsz" 144; }
 
-    /* ═══════════════════════════════════
-       Footer
-       ═══════════════════════════════════ */
+    .cta__body {
+      font-family: var(--f-read);
+      font-size: 1.12rem;
+      line-height: 1.6;
+      color: rgba(244, 240, 230, 0.78);
+      max-width: 560px;
+      margin-bottom: 2.2rem;
+    }
+    .cta__ctas {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .cta .btn--ink {
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .cta .btn--ink:hover { background: var(--accent-gold); color: var(--ink); }
+    .cta .btn--ghost {
+      color: var(--paper);
+      border-color: rgba(244, 240, 230, 0.35);
+    }
+    .cta .btn--ghost:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
 
+    .cta__email {
+      margin-top: 2.2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(244, 240, 230, 0.18);
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(244, 240, 230, 0.6);
+    }
+    .cta__email a { color: var(--accent-gold); border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+
+    /* ══════════════════════════════════════════════════════════
+       FOOTER — colophon
+       ══════════════════════════════════════════════════════════ */
     .footer {
-      padding: 1.15rem 0;
+      background: var(--paper);
+      padding-top: 2.2rem;
+      padding-bottom: 2.2rem;
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+      padding-top: 1.5rem;
       border-top: 1px solid var(--rule);
     }
+    .footer__mark-wordmark {
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      font-variation-settings: "opsz" 144;
+    }
+    .footer__mark-wordmark .amp { font-style: italic; font-weight: 500; color: var(--accent-red); padding: 0 0.04em; }
+    .footer__mark-sub {
+      font-family: var(--f-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-top: 0.35rem;
+    }
+    .footer__col h4 {
+      font-family: var(--f-mono);
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+    .footer__col p, .footer__col a {
+      font-family: var(--f-read);
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      display: block;
+    }
+    .footer__col a:hover { color: var(--accent-red); }
 
-    .footer .wrap {
+    .footer__copyline {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--rule);
       display: flex;
-      align-items: center;
       justify-content: space-between;
       gap: 1rem;
+      font-family: var(--f-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      flex-wrap: wrap;
     }
 
-    .footer__mark {
-      height: 17px;
-      width: auto;
-      opacity: 0.22;
+    /* ══════════════════════════════════════════════════════════
+       ENTRY ANIMATION — subtle stagger
+       ══════════════════════════════════════════════════════════ */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero__slug-label, .hero__h1, .hero__deck, .hero__ctas {
+        opacity: 0;
+        transform: translateY(8px);
+        animation: riseIn 0.7s ease forwards;
+      }
+      .hero__slug-label { animation-delay: 0.05s; }
+      .hero__h1        { animation-delay: 0.15s; }
+      .hero__deck      { animation-delay: 0.35s; }
+      .hero__ctas      { animation-delay: 0.5s; }
+
+      @keyframes riseIn {
+        to { opacity: 1; transform: translateY(0); }
+      }
     }
 
-    .footer__copy {
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      letter-spacing: 0.02em;
-    }
-
-    /* ═══════════════════════════════════
-       Responsive · 1080
-       ═══════════════════════════════════ */
-
+    /* ══════════════════════════════════════════════════════════
+       RESPONSIVE · 1080
+       ══════════════════════════════════════════════════════════ */
     @media (max-width: 1080px) {
-      .hero__grid {
-        grid-template-columns: minmax(0, 440px) 1fr;
-        gap: 2.25rem;
-      }
+      .wrap { padding-left: 2rem; padding-right: 2rem; }
 
-      .hero__gold-shape {
-        width: 410px;
-        height: 350px;
-        top: 55px;
-        left: -16px;
-      }
-
-      .hero__h1 { font-size: clamp(2.3rem, 3.8vw, 3.2rem); }
-
-      .hero__visual-card { max-width: 480px; }
+      .edge__grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+      .beat__grid { grid-template-columns: repeat(2, 1fr); }
+      .beat__step { border-bottom: 1px solid var(--rule); }
+      .beat__step:nth-child(2) { border-right: none; }
     }
 
-    /* ═══════════════════════════════════
-       Responsive · 920  (single-column)
-       ═══════════════════════════════════ */
+    /* ══════════════════════════════════════════════════════════
+       RESPONSIVE · 900 — stack main cols
+       ══════════════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .topbar .wrap { flex-direction: column; gap: 0.3rem; font-size: 0.62rem; letter-spacing: 0.14em; }
 
-    @media (max-width: 920px) {
-      .wrap {
-        padding-left: 2rem;
-        padding-right: 2rem;
-      }
+      .masthead .wrap { grid-template-columns: 1fr; gap: 0.9rem; text-align: center; }
+      .masthead__left { text-align: center; }
+      .masthead__nav { justify-content: center; }
 
-      .hero .wrap {
-        padding-top: 4rem;
-        padding-bottom: 3.75rem;
-      }
+      .hero__grid,
+      .edge__head,
+      .cases__header,
+      .offer__head,
+      .beat__head,
+      .case { grid-template-columns: 1fr; gap: 1.5rem; }
 
-      .hero__grid {
-        grid-template-columns: 1fr;
-        gap: 2.25rem;
-      }
+      .hero__slug { border-top: none; padding-top: 0; padding-right: 0; }
+      .hero__body { border-top: none; padding-top: 0; }
 
-      .hero__copy { max-width: 520px; }
+      .edge__head, .cases__header, .offer__head, .beat__head { gap: 1.25rem; margin-bottom: 2.5rem; }
 
-      .hero__gold-shape {
-        width: 390px;
-        height: 330px;
-        top: 48px;
-        left: -14px;
-      }
+      .offer__grid { grid-template-columns: 1fr; }
+      .tier { border-right: none; border-bottom: 1px solid var(--ink); }
+      .tier:last-child { border-bottom: none; }
 
-      .hero__visual { display: none; }
-
-      .hero__proof-mobile {
-        display: block;
-        max-width: 520px;
-        border: 1px solid rgba(255, 255, 255, 0.055);
-        overflow: hidden;
-        box-shadow: var(--shadow-card);
-      }
-
-      .hero__proof-mobile img { width: 100%; display: block; }
-
-      .offer__grid {
-        grid-template-columns: 1fr;
-        gap: 1.75rem;
-      }
-
-      .edge { padding: 2.25rem 0; }
+      .footer__grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer__copyline { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
     }
 
-    /* ═══════════════════════════════════
-       Responsive · 680  (mobile)
-       ═══════════════════════════════════ */
-
+    /* ══════════════════════════════════════════════════════════
+       RESPONSIVE · 680 — mobile
+       ══════════════════════════════════════════════════════════ */
     @media (max-width: 680px) {
-      .wrap {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-      }
+      body { font-size: 16px; }
+      .wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
 
-      .header .wrap { height: 60px; }
-      .header__logo { height: 36px; }
-      .header__nav { gap: 1rem; }
+      .topbar .wrap { padding-top: 0.45rem; padding-bottom: 0.45rem; }
+      .topbar__dateline span + span { margin-left: 0.5rem; padding-left: 0.5rem; }
 
-      .header__link {
-        font-size: 0.62rem;
-        letter-spacing: 0.1em;
-      }
+      .masthead .wrap { padding-top: 0.85rem; padding-bottom: 0.85rem; }
+      .masthead__wordmark { font-size: 1.6rem; }
+      .masthead__sub { font-size: 0.58rem; letter-spacing: 0.22em; }
+      .masthead__nav { gap: 0.9rem; flex-wrap: wrap; }
+      .masthead__link { font-size: 0.63rem; letter-spacing: 0.12em; }
+      .masthead__cta { padding: 0.68em 1.1em; font-size: 0.62rem; }
 
-      .header .btn {
-        padding: 0.68em 1.3em;
-        font-size: 0.62rem;
-      }
+      .hero { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+      .hero__h1 { font-size: clamp(2rem, 10vw, 3rem); letter-spacing: -0.03em; margin-bottom: 1.25rem; }
+      .hero__deck { font-size: 1.02rem; }
+      .hero__deck::first-letter { font-size: 3rem; padding-right: 0.45rem; }
 
-      .hero .wrap {
-        padding-top: 2.75rem;
-        padding-bottom: 2.5rem;
-      }
+      .featured-shot { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+      .featured-shot__caption-top { flex-direction: column; gap: 0.3rem; align-items: flex-start; }
 
-      .hero__copy { max-width: 100%; }
+      .edge__lede, .cases__title, .offer__title, .beat__title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
 
-      .hero__gold-shape {
-        top: 44px;
-        left: -10px;
-        width: 310px;
-        height: 278px;
-      }
+      .edge__grid { grid-template-columns: 1fr; gap: 1.5rem; }
 
-      .hero__rule {
-        width: 38px;
-        margin: 0.65rem 0 1.1rem;
-      }
+      .tier { padding: 1.75rem; }
 
-      .hero__h1 {
-        font-size: clamp(1.95rem, 8.8vw, 2.75rem);
-        line-height: 0.975;
-        letter-spacing: -0.046em;
-        margin-bottom: 1.25rem;
-      }
+      .beat__grid { grid-template-columns: 1fr; }
+      .beat__step { border-right: none; border-bottom: 1px solid var(--rule); padding: 1.25rem 0 1.5rem; }
+      .beat__step:last-child { border-bottom: none; }
 
-      .hero__sub {
-        max-width: 100%;
-        font-size: 0.92rem;
-        line-height: 1.78;
-        margin-bottom: 1.5rem;
-        color: rgba(244, 241, 234, 0.64);
-      }
+      .cta { padding-top: 4rem; padding-bottom: 4rem; }
+      .cta__h2 { font-size: clamp(1.8rem, 9vw, 3rem); }
+      .cta__body { font-size: 1rem; }
 
-      .hero__proof-mobile {
-        max-width: 100%;
-        margin-top: 0.15rem;
-      }
-
-      .btn {
-        padding: 0.82em 1.5em;
-        font-size: 0.66rem;
-      }
-
-      .label { font-size: 0.62rem; letter-spacing: 0.19em; }
-
-      .edge { padding: 2rem 0; }
-      .edge__text { font-size: 0.93rem; line-height: 1.85; }
-
-      .offer { padding: 3rem 0; }
-      .offer__top { margin-bottom: 2rem; }
-      .offer__desc { font-size: 0.92rem; }
-
-      .proof { padding: 3rem 0; }
-      .proof__eyebrow { margin-bottom: 1.75rem; }
-
-      .case__name { font-size: 1.1rem; }
-      .case__desc { font-size: 0.91rem; line-height: 1.82; }
-
-      .cta-final { padding: 3rem 0 3.5rem; }
-      .cta-final__body { font-size: 0.92rem; }
-
-      .footer .wrap {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.5rem;
-      }
-
-      .footer__mark { height: 15px; }
-      .footer__copy { font-size: 0.68rem; }
-    }
-
-    /* ═══════════════════════════════════
-       Responsive · 480  (small phone)
-       ═══════════════════════════════════ */
-
-    @media (max-width: 480px) {
-      .wrap {
-        padding-left: 1.05rem;
-        padding-right: 1.05rem;
-      }
-
-      .header .wrap { height: 54px; }
-      .header__logo { height: 32px; }
-      .header__nav .header__link { display: none; }
-
-      .header .btn {
-        padding: 0.64em 1.15em;
-        font-size: 0.6rem;
-      }
-
-      .hero .wrap {
-        padding-top: 2.25rem;
-        padding-bottom: 2rem;
-      }
-
-      .hero__gold-shape {
-        top: 38px;
-        left: -8px;
-        width: 272px;
-        height: 246px;
-      }
-
-      .hero__rule {
-        width: 32px;
-        margin: 0.55rem 0 0.9rem;
-      }
-
-      .hero__h1 {
-        font-size: clamp(1.78rem, 8.5vw, 2.35rem);
-        line-height: 0.97;
-        margin-bottom: 1.05rem;
-      }
-
-      .hero__sub {
-        font-size: 0.88rem;
-        line-height: 1.75;
-        margin-bottom: 1.3rem;
-      }
-
-      .btn {
-        padding: 0.75em 1.3em;
-        font-size: 0.63rem;
-        letter-spacing: 0.14em;
-      }
-
-      .edge { padding: 1.75rem 0; }
-      .edge__text { font-size: 0.89rem; line-height: 1.82; }
-
-      .offer { padding: 2.5rem 0; }
-      .offer__title { font-size: 1.38rem; }
-      .offer__price { font-size: 0.83rem; }
-      .offer__desc { font-size: 0.88rem; line-height: 1.82; }
-
-      .inc-list li { font-size: 0.88rem; padding: 0.58rem 0 0.58rem 0.9rem; }
-
-      .tier-block__name { font-size: 0.97rem; }
-      .tier-block__desc { font-size: 0.85rem; }
-
-      .addon-list li { font-size: 0.85rem; padding: 0.55rem 0; }
-      .addon-price { font-size: 0.8rem; }
-
-      .proof { padding: 2.5rem 0; }
-      .proof__eyebrow { margin-bottom: 1.35rem; }
-
-      .case__tag { font-size: 0.6rem; }
-      .case__name { font-size: 1.02rem; }
-      .case__desc { font-size: 0.87rem; line-height: 1.8; }
-
-      .cta-final { padding: 2.5rem 0 3rem; }
-      .cta-final__h2 { font-size: 1.4rem; }
-      .cta-final__body { font-size: 0.88rem; line-height: 1.82; }
+      .btn { padding: 0.9em 1.45em; font-size: 0.68rem; }
     }
   </style>
 </head>
 <body>
 
-  <header class="header">
+  <!-- ═════ TOPBAR / DATELINE ═════ -->
+  <div class="topbar" role="contentinfo">
     <div class="wrap">
-      <a href="#" aria-label="Graham and Gold home">
-        <img src="assets/graham_gold_primary_logo_tight.png" alt="Graham &amp; Gold" class="header__logo">
+      <div class="topbar__dateline">
+        <span>Vol. I · Issue 01</span>
+        <span>Ft. Lauderdale, FL</span>
+        <span>Est. 2025</span>
+      </div>
+      <div class="topbar__status">Now taking briefs</div>
+    </div>
+  </div>
+
+  <!-- ═════ MASTHEAD ═════ -->
+  <header class="masthead">
+    <div class="wrap">
+      <div class="masthead__left">A one-desk newsroom for small businesses</div>
+      <a href="#top" class="masthead__center" aria-label="Graham and Gold — home">
+        <div class="masthead__wordmark">Graham<span class="amp">&amp;</span>Gold</div>
+        <div class="masthead__sub">An Editor's Studio</div>
       </a>
-      <nav class="header__nav">
-        <a href="#offer" class="header__link">Offer</a>
-        <a href="#proof" class="header__link">Proof</a>
-        <a href="mailto:usadrew00@icloud.com?subject=Graham%20%26%20Gold%20Inquiry" class="btn btn--gold">Send a Note</a>
+      <nav class="masthead__nav" aria-label="Primary">
+        <a href="#cases" class="masthead__link">Case Files</a>
+        <a href="#offer" class="masthead__link">Offer</a>
+        <a href="mailto:usadrew00@icloud.com?subject=Graham%20%26%20Gold%20%E2%80%94%20Brief" class="btn btn--ink masthead__cta">File a Brief →</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero__grid">
-        <div class="hero__copy">
-          <div class="hero__gold-shape" aria-hidden="true"></div>
-          <p class="label">Editorial Firepower for Small Businesses</p>
-          <hr class="hero__rule">
-          <h1 class="hero__h1">I turn stale<br>small-business<br>websites into<br>sharper, story-driven<br>brands.</h1>
-          <p class="hero__sub">Using editorial storytelling and sharp positioning, I help owners and operators come across as the trusted local experts they already are, with a digital presence that finally matches the business.</p>
-          <a href="mailto:usadrew00@icloud.com?subject=Graham%20%26%20Gold%20Inquiry" class="btn btn--gold">Send a Note</a>
-        </div>
+  <main id="top">
 
-        <div class="hero__visual" aria-hidden="true">
-          <div class="hero__visual-card">
-            <img src="assets/BEFORE-AFTER.png" alt="">
+    <!-- ═════ HERO ═════ -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero__grid">
+          <aside class="hero__slug">
+            <div class="hero__slug-label">§ Today's Lead</div>
+            <div class="hero__slug-byline">
+              <strong>By Drew Graham</strong><br>
+              News Director<br>
+              20+ years in journalism<br>
+              Filed April 2026
+            </div>
+          </aside>
+
+          <div class="hero__body">
+            <h1 class="hero__h1">Your website needs an <em>editor</em>, not another designer.</h1>
+            <p class="hero__deck">Most small-business websites don't have a design problem. They have an editing problem. The copy is soft, the headlines are buried, and the site sounds nothing like the owner actually talks. Graham &amp; Gold is a one-desk newsroom for small businesses — a working news director rewrites, reshapes, and rebuilds your website the way he'd edit a front-page story.</p>
+            <div class="hero__ctas">
+              <a href="mailto:usadrew00@icloud.com?subject=Graham%20%26%20Gold%20%E2%80%94%20Brief" class="btn btn--ink">File a Brief <span class="btn__arrow">→</span></a>
+              <a href="#cases" class="btn btn--ghost">Read the Case Files</a>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="hero__proof-mobile">
-        <img src="assets/BEFORE-AFTER.png" alt="Before and after website transformation for The Pink Boat">
+    <!-- ═════ FEATURED SHOT — Florida Signal front-page photo ═════ -->
+    <section class="featured-shot">
+      <div class="wrap">
+        <div class="featured-shot__caption-top">
+          <div class="featured-shot__kicker">Above the fold · Capability proof</div>
+          <div class="featured-shot__byline">The Florida Signal · Live platform</div>
+        </div>
+        <div class="featured-shot__frame">
+          <img src="assets/fl-signal-showcase.png" alt="The Florida Signal — a live editorial intelligence platform for Broward County, built and edited by Graham & Gold">
+        </div>
+        <p class="featured-shot__cap"><strong>The Florida Signal —</strong> built and edited in-house. A live editorial intelligence platform tracking permits, filings, and public-record signals across Fort Lauderdale and Broward County. Running against a cleaned database of 154,751 rows. Not a mockup. A working publication with a production cycle and a subscriber list.</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="edge">
-    <div class="wrap">
-      <p class="edge__text"><strong>20+ years in journalism</strong> taught me how to find the real story behind a business and shape it into something people pay attention to. I bring that instinct to every project by sharpening positioning, writing copy that sounds like a real person, and building sites that make the owner look like the recognized local authority they already are.</p>
-    </div>
-  </section>
-
-  <section class="offer" id="offer">
-    <div class="wrap">
-      <div class="offer__top">
-        <p class="label" style="margin-bottom: 0.7rem;">The Offer</p>
-        <h2 class="offer__title">Narrative Systems Refresh</h2>
-        <p class="offer__price">Starting at $4,900</p>
-        <p class="offer__desc">A complete digital repositioning for small businesses and operators. In three weeks I rebuild the site, sharpen the positioning, rewrite every word, and engineer a digital presence that matches the quality of what you actually deliver.</p>
-      </div>
-
-      <div class="offer__grid">
-        <div>
-          <p class="label offer__col-label">Includes</p>
-          <ul class="inc-list">
-            <li>Strategic positioning and messaging refresh</li>
-            <li>Fully rewritten website copy</li>
-            <li>Custom website redesign and build</li>
-            <li>Mobile-first optimization</li>
-            <li>Trust and review integration</li>
-            <li>Launch support plus 30-day optimization review</li>
-          </ul>
+    <!-- ═════ THE EDGE ═════ -->
+    <section class="edge" id="edge">
+      <div class="wrap">
+        <div class="section-marker">
+          <span class="section-marker__num">§ 01</span>
+          <span class="section-marker__name">The Edge</span>
         </div>
 
-        <div>
-          <div class="tier-block">
-            <p class="tier-block__name">Refresh Plus</p>
-            <p class="tier-block__price">Starting at $6,500</p>
-            <p class="tier-block__desc">Everything in the core package plus deeper offer architecture, up to three additional pages, expanded copywriting, richer visual merchandising, and advanced booking flow optimization.</p>
+        <div class="edge__head">
+          <div class="label label--red">Why a journalist beats a designer at this.</div>
+          <h2 class="edge__lede">Twenty years of editing. Now aimed at <em>your website</em>.</h2>
+        </div>
+
+        <div class="edge__grid">
+          <div class="edge__col">
+            <div class="edge__col-num">01</div>
+            <h3 class="edge__col-h">I find the lead.</h3>
+            <p class="edge__col-body">Most small-business websites bury the one thing that makes the business worth choosing. Finding it and putting it on the front page is what editors do for a living. I do that for you.</p>
           </div>
-
-          <p class="label offer__col-label">Add-ons</p>
-          <ul class="addon-list">
-            <li><span>Booking Flow Integration</span><span class="addon-price">$750 – $1,200</span></li>
-            <li><span>Extra Pages</span><span class="addon-price">$250 – $500 / page</span></li>
-            <li><span>Photo Direction + Image Cleanup</span><span class="addon-price">$500 – $1,500</span></li>
-            <li><span>Launch Support Retainer</span><span class="addon-price">$500 – $1,500 / mo</span></li>
-          </ul>
+          <div class="edge__col">
+            <div class="edge__col-num">02</div>
+            <h3 class="edge__col-h">I kill the fluff.</h3>
+            <p class="edge__col-body">"Empowering solutions." "Seamless experiences." "Passionate about quality." Real newsrooms delete this kind of language on sight. So does your customer, a quarter of a second after they land.</p>
+          </div>
+          <div class="edge__col">
+            <div class="edge__col-num">03</div>
+            <h3 class="edge__col-h">I write like a person.</h3>
+            <p class="edge__col-body">Your website should sound like you on a good day, not like a marketing brochure from 2011. I rewrite every line of copy so a customer recognizes a human on the other end of it.</p>
+          </div>
+          <div class="edge__col">
+            <div class="edge__col-num">04</div>
+            <h3 class="edge__col-h">I build it right.</h3>
+            <p class="edge__col-body">Clean code, fast load, readable on a phone, trust signals in the right places, booking or contact where it belongs. Published, not just designed. That's the whole deal.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="proof" id="proof">
-    <div class="wrap">
-      <p class="label proof__eyebrow">Proof</p>
+    <!-- ═════ CASE FILES ═════ -->
+    <section class="cases" id="cases">
+      <div class="wrap">
+        <div class="section-marker">
+          <span class="section-marker__num">§ 02</span>
+          <span class="section-marker__name">Case Files</span>
+        </div>
 
-      <div class="proof__grid">
+        <div class="cases__header">
+          <div class="label label--red">Two real stories. No filler. No fake metrics.</div>
+          <h2 class="cases__title">What the work actually <em>looks like</em>.</h2>
+        </div>
+
+        <!-- CASE 01 — FL SIGNAL -->
         <article class="case">
-          <p class="case__tag">Transformation Build</p>
-          <h3 class="case__name">The Pink Boat Dolphin Cruises · Orange Beach, AL</h3>
-          <div class="case__img">
-            <img src="assets/BEFORE-AFTER.png" alt="Before and after The Pink Boat website redesign">
+          <aside class="case__meta">
+            <div class="case__meta-file">Case File 01</div>
+            <div class="case__meta-date">Filed · 2026 · Ongoing</div>
+            <ul class="case__meta-list">
+              <li><span>Client</span><span>In-house</span></li>
+              <li><span>Type</span><span>Editorial platform</span></li>
+              <li><span>Sector</span><span>Public records</span></li>
+              <li><span>Location</span><span>Broward Co., FL</span></li>
+              <li><span>Status</span><span>Live</span></li>
+            </ul>
+          </aside>
+
+          <div class="case__content">
+            <h3>The Florida Signal — a live editorial intelligence platform, built and edited from scratch.</h3>
+            <p>Graham &amp; Gold's own publication. A subscriber-funded intelligence product tracking construction permits, public filings, and leading-indicator signals across Fort Lauderdale and Broward County. Every week: a cleaned dataset, a detection pass, a written issue, a published archive. This is the answer to "can a journalist actually build something sophisticated online." Yes. He can. He did.</p>
+            <p>If you're hiring Graham &amp; Gold, you're hiring the same editorial process that runs The Florida Signal — applied to your business, your site, and your story.</p>
+            <div class="case__frame">
+              <img src="assets/fl-signal-showcase.png" alt="The Florida Signal editorial intelligence platform">
+            </div>
+            <p class="case__cap"><em>The Florida Signal — weekly editorial intelligence, Broward County. Live at thefloridasignal.com.</em></p>
           </div>
-          <p class="case__desc">Took a dated brochure site and turned it into a cleaner, sharper, higher-conviction booking experience, with stronger trust signals, clearer offers, and a more premium sense of brand.</p>
         </article>
 
+        <!-- CASE 02 — PINK BOAT -->
         <article class="case">
-          <p class="case__tag">Editorial Platform Build</p>
-          <h3 class="case__name">The Florida Signal · Broward County, FL</h3>
-          <div class="case__img">
-            <img src="assets/fl-signal-showcase.png" alt="The Florida Signal editorial intelligence platform">
+          <aside class="case__meta">
+            <div class="case__meta-file">Case File 02</div>
+            <div class="case__meta-date">Filed · 2026 · Shipped</div>
+            <ul class="case__meta-list">
+              <li><span>Client</span><span>The Pink Boat</span></li>
+              <li><span>Type</span><span>Transformation build</span></li>
+              <li><span>Sector</span><span>Tourism / excursions</span></li>
+              <li><span>Location</span><span>Orange Beach, AL</span></li>
+              <li><span>Status</span><span>Shipped</span></li>
+            </ul>
+          </aside>
+
+          <div class="case__content">
+            <h3>The Pink Boat Dolphin Cruises — from brochure site to bookable brand.</h3>
+            <p>Tabby and Captain Bart run a woman-owned dolphin cruise out of Orange Beach. Great business, great boat, great story. Website didn't reflect any of it. Graham &amp; Gold rewrote every line, rebuilt the site, added a live-conditions module, cleaned up the booking flow, and re-framed the brand around the people actually running it. Trust signals up. Friction down. The site finally matches the business.</p>
+            <div class="case__frame">
+              <img src="assets/BEFORE-AFTER.png" alt="Before and after — The Pink Boat Dolphin Cruises website redesign by Graham & Gold">
+            </div>
+            <p class="case__cap"><em>Before, left — the old brochure site. After, right — the Graham &amp; Gold rebuild with live conditions, booking integration, and a sharpened captain-led brand.</em></p>
           </div>
-          <p class="case__desc">Built a live editorial intelligence platform from scratch, with structured public-record signals, premium positioning, and a subscription-ready information design system. This is capability proof, not just makeover proof.</p>
         </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="cta-final" id="contact">
-    <div class="wrap">
-      <h2 class="cta-final__h2">Ready to elevate your digital presence?</h2>
-      <p class="cta-final__body">Send a note with your current site and I'll tell you exactly what a Narrative Systems Refresh could look like for your business.</p>
-      <a href="mailto:usadrew00@icloud.com?subject=Graham%20%26%20Gold%20Inquiry" class="btn btn--gold">Send a Note</a>
-    </div>
-  </section>
+    <!-- ═════ OFFER ═════ -->
+    <section class="offer" id="offer">
+      <div class="wrap">
+        <div class="section-marker">
+          <span class="section-marker__num">§ 03</span>
+          <span class="section-marker__name">What You Get</span>
+        </div>
 
+        <div class="offer__head">
+          <div class="label label--red">Two assignments. Pick the one that fits.</div>
+          <h2 class="offer__title">No retainers you don't need. No packages full of <em>filler</em>.</h2>
+        </div>
+
+        <div class="offer__grid">
+          <!-- TIER 1 -->
+          <div class="tier">
+            <div class="tier__kicker">Assignment 01</div>
+            <h3 class="tier__name">The Sharpening</h3>
+            <div class="tier__timeline">10–14 days · Starting at <strong style="color:var(--accent-red)">$1,800</strong></div>
+            <p class="tier__desc">For owners with a site that mostly works but sounds wrong. A full editorial pass — positioning, headlines, body copy, trust signals — plus a visual tune-up and a mobile-first cleanup.</p>
+            <ul class="tier__list">
+              <li>Positioning and messaging pass</li>
+              <li>Full copy rewrite, page by page</li>
+              <li>Visual cleanup and hierarchy fixes</li>
+              <li>Mobile &amp; load-speed pass</li>
+              <li>Launch checklist and handoff</li>
+            </ul>
+            <div class="tier__cta">
+              <a href="mailto:usadrew00@icloud.com?subject=Graham%20%26%20Gold%20%E2%80%94%20The%20Sharpening" class="btn btn--ghost">Start a Sharpening <span class="btn__arrow">→</span></a>
+            </div>
+          </div>
+
+          <!-- TIER 2 -->
+          <div class="tier">
+            <div class="tier__kicker">Assignment 02 · Flagship</div>
+            <h3 class="tier__name">The Rebuild</h3>
+            <div class="tier__timeline">≈ 3 weeks · Starting at <strong style="color:var(--accent-red)">$3,500</strong></div>
+            <p class="tier__desc">A full repositioning, an editorial rewrite of every page, and a brand-new website built from scratch around your real story. Trust signals, booking or contact integration, launch support, and a 30-day review after go-live.</p>
+            <ul class="tier__list">
+              <li>Discovery interview + positioning brief</li>
+              <li>New site, built from scratch</li>
+              <li>Full page-by-page editorial rewrite</li>
+              <li>Booking / contact flow integration</li>
+              <li>Trust, review, and proof placement</li>
+              <li>Launch support + 30-day review</li>
+            </ul>
+            <div class="tier__cta">
+              <a href="mailto:usadrew00@icloud.com?subject=Graham%20%26%20Gold%20%E2%80%94%20The%20Rebuild" class="btn btn--ink">Commission a Rebuild <span class="btn__arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+
+        <p class="offer__footnote"><strong>Aftercare —</strong> optional monthly care starting at $149/mo for updates and site health, or $249/mo with ongoing visibility support. Added on request; never the main event.</p>
+      </div>
+    </section>
+
+    <!-- ═════ THE BEAT ═════ -->
+    <section class="beat" id="beat">
+      <div class="wrap">
+        <div class="section-marker">
+          <span class="section-marker__num">§ 04</span>
+          <span class="section-marker__name">The Beat</span>
+        </div>
+
+        <div class="beat__head">
+          <div class="label label--red">Four steps. The same ones every newsroom runs.</div>
+          <h2 class="beat__title">How a story — or a website — <em>actually gets made</em>.</h2>
+        </div>
+
+        <div class="beat__grid">
+          <div class="beat__step">
+            <div class="beat__step-num">Step 01</div>
+            <h3 class="beat__step-name">Brief</h3>
+            <p class="beat__step-body">A short conversation and a written brief. What the business actually does, who it does it for, and where the current site is lying about it.</p>
+          </div>
+          <div class="beat__step">
+            <div class="beat__step-num">Step 02</div>
+            <h3 class="beat__step-name">Report</h3>
+            <p class="beat__step-body">I interview you like a source. I dig through what customers say, what reviews say, and what the competition sounds like. The real story comes out here.</p>
+          </div>
+          <div class="beat__step">
+            <div class="beat__step-num">Step 03</div>
+            <h3 class="beat__step-name">Write</h3>
+            <p class="beat__step-body">Every line of copy rewritten, every headline earned, every section structured to move a reader from landing to action. The site gets built around the writing, not the other way around.</p>
+          </div>
+          <div class="beat__step">
+            <div class="beat__step-num">Step 04</div>
+            <h3 class="beat__step-name">Ship</h3>
+            <p class="beat__step-body">We publish. Launch checklist runs. Thirty days later we review what's working and what isn't, and we sharpen anything that's dull.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════ CTA FINAL ═════ -->
+    <section class="cta" id="contact">
+      <div class="wrap">
+        <div class="cta__slug">§ 05 · File a Brief</div>
+        <h2 class="cta__h2">Got a story that isn't reading right <em>online</em>?</h2>
+        <p class="cta__body">Send a note with your current site and what's bugging you about it. You'll get an honest read back — what's working, what's buried, and what a Sharpening or a Rebuild would actually look like for your business. No decks. No pitch meetings.</p>
+        <div class="cta__ctas">
+          <a href="mailto:usadrew00@icloud.com?subject=Graham%20%26%20Gold%20%E2%80%94%20Brief" class="btn btn--ink">File a Brief <span class="btn__arrow">→</span></a>
+          <a href="#cases" class="btn btn--ghost">Read the Case Files</a>
+        </div>
+        <div class="cta__email">Direct · <a href="mailto:usadrew00@icloud.com">usadrew00@icloud.com</a></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═════ FOOTER / COLOPHON ═════ -->
   <footer class="footer">
     <div class="wrap">
-      <img src="assets/graham_gold_GG_transparent.png" alt="GG" class="footer__mark">
-      <p class="footer__copy">&copy; 2026 Graham &amp; Gold. All rights reserved.</p>
+      <div class="footer__grid">
+        <div>
+          <div class="footer__mark-wordmark">Graham<span class="amp">&amp;</span>Gold</div>
+          <div class="footer__mark-sub">An Editor's Studio · Est. 2025</div>
+        </div>
+        <div class="footer__col">
+          <h4>Sections</h4>
+          <a href="#edge">The Edge</a>
+          <a href="#cases">Case Files</a>
+          <a href="#offer">Offer</a>
+          <a href="#beat">The Beat</a>
+          <a href="#contact">File a Brief</a>
+        </div>
+        <div class="footer__col">
+          <h4>Desk</h4>
+          <a href="mailto:usadrew00@icloud.com">usadrew00@icloud.com</a>
+          <p>Ft. Lauderdale, FL</p>
+          <p>Mon–Fri · By brief</p>
+        </div>
+      </div>
+      <div class="footer__copyline">
+        <span>© 2026 Graham &amp; Gold. All rights reserved.</span>
+        <span>Colophon · Fraunces · Newsreader · IBM Plex Mono</span>
+      </div>
     </div>
   </footer>
 
